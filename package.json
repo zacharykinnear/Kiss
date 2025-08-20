@@ -1,0 +1,73 @@
+{
+  "name": "mailmate",
+  "version": "1.0.0",
+  "description": "Email app that connects to Gmail and processes emails through ChatGPT API",
+  "main": "main.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "webpack --mode production",
+    "dev:build": "webpack --mode development --watch",
+    "electron": "electron .",
+    "electron-dev": "electron . --dev",
+    "package": "electron-builder",
+    "dist": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "electron": "^28.3.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "googleapis": "^128.0.0",
+    "helmet": "^7.1.0",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "electron-builder": "^24.9.1",
+    "html-webpack-plugin": "^5.5.3",
+    "nodemon": "^3.0.2",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "build": {
+    "appId": "com.mailmate.app",
+    "productName": "MailMate",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "server.js",
+      "services/**/*",
+      "public/**/*",
+      "node_modules/**/*",
+      ".env"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "public/icon.svg"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "public/icon.svg"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "public/icon.svg"
+    }
+  },
+  "keywords": [
+    "email",
+    "gmail",
+    "chatgpt",
+    "api",
+    "desktop"
+  ],
+  "author": "MailMate",
+  "license": "MIT"
+}
