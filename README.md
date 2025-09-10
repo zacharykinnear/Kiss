@@ -1,236 +1,201 @@
-# MailMate - AI-Powered Email Assistant
+# MailMate - Modern Email App
 
-MailMate is a modern email application that connects to Gmail via API and processes emails using ChatGPT's AI capabilities. It provides intelligent email management with features like summarization, categorization, smart replies, and sentiment analysis.
+A beautiful, modern email application with Gmail integration and intelligent email management. Built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Features
 
-### 🔐 Gmail Integration
-- Secure OAuth2 authentication with Gmail
-- Read, search, and send emails through Gmail API
-- Automatic token refresh and management
+- 🔐 **Multiple Gmail Account Support** - Connect and manage multiple Gmail accounts
+- 🎨 **Beautiful Dark UI** - Modern, responsive design with smooth animations
+- 📧 **Smart Categorization** - Automatic email categorization (Priority, Active, Internal, Partners, News)
+- 🔍 **Advanced Search** - Search across all connected accounts
+- 📱 **Responsive Design** - Works perfectly on desktop, tablet, and mobile
+- ⚡ **Real-time Sync** - Live email synchronization with Gmail
+- 🎯 **Smart Actions** - Promote, snooze, and manage emails efficiently
+- 🔄 **Account Switching** - Seamlessly switch between connected accounts
 
-### 🤖 AI-Powered Email Processing
-- **Email Summarization**: Get concise summaries of long emails
-- **Smart Categorization**: Automatically categorize emails into work, personal, marketing, etc.
-- **Intelligent Reply Generation**: Generate contextual and professional replies
-- **Action Item Extraction**: Extract tasks, deadlines, and action items from emails
-- **Sentiment Analysis**: Analyze the emotional tone and urgency of emails
+## Screenshots
 
-### 🎨 Modern User Interface
-- Clean, responsive design with modern UI/UX
-- Real-time email loading and processing
-- Modal-based email viewing with AI actions
-- Search functionality across all emails
-- Mobile-responsive design
+The app features a beautiful dark theme with:
+- Left navigation rail with account switcher
+- Category sidebar with smart filtering
+- Message list with rich previews
+- Detailed message view with action buttons
+- Compose interface for new emails
 
-## Prerequisites
+## Tech Stack
 
-Before running MailMate, you'll need:
+- **Frontend**: Next.js 14, React 18, TypeScript
+- **Styling**: Tailwind CSS with custom design system
+- **State Management**: Zustand with persistence
+- **Authentication**: Google OAuth 2.0
+- **Email API**: Gmail API
+- **Icons**: Lucide React
+- **Notifications**: React Hot Toast
 
-1. **Node.js** (v14 or higher)
-2. **Gmail API Credentials**:
-   - Go to [Google Cloud Console](https://console.cloud.google.com/)
-   - Create a new project or select existing one
-   - Enable Gmail API
-   - Create OAuth2 credentials
-   - Download the credentials JSON file
+## Getting Started
 
-3. **ChatGPT API Key**:
-   - Sign up at [OpenAI](https://platform.openai.com/)
-   - Get your API key from the dashboard
+### Prerequisites
 
-## Installation
+- Node.js 18+ 
+- npm or yarn
+- Google Cloud Console account
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd MailMate
-   ```
+### 1. Clone the Repository
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**:
-   Create a `.env` file in the root directory with the following variables:
-   ```env
-   # Gmail API Configuration
-   GMAIL_CLIENT_ID=your_gmail_client_id_here
-   GMAIL_CLIENT_SECRET=your_gmail_client_secret_here
-   GMAIL_REDIRECT_URI=http://localhost:3000/api/auth/gmail/callback
-
-   # ChatGPT API Configuration
-   OPENAI_API_KEY=your_openai_api_key_here
-
-   # Server Configuration
-   PORT=3000
-   NODE_ENV=development
-   ```
-
-4. **Start the application**:
-   ```bash
-   npm start
-   ```
-
-5. **Open your browser**:
-   Navigate to `http://localhost:3000`
-
-## Gmail API Setup
-
-### Step 1: Create Google Cloud Project
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select an existing one
-3. Enable the Gmail API for your project
-
-### Step 2: Create OAuth2 Credentials
-1. Go to "APIs & Services" > "Credentials"
-2. Click "Create Credentials" > "OAuth 2.0 Client IDs"
-3. Choose "Web application" as the application type
-4. Add authorized redirect URIs:
-   - `http://localhost:3000/api/auth/gmail/callback` (for development)
-   - Your production URL (for deployment)
-5. Download the JSON file with your credentials
-
-### Step 3: Configure Environment Variables
-Update your `.env` file with the credentials from the downloaded JSON file:
-```env
-GMAIL_CLIENT_ID=your_client_id_from_json
-GMAIL_CLIENT_SECRET=your_client_secret_from_json
+```bash
+git clone <repository-url>
+cd mailmate
 ```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Set Up Google OAuth
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select existing one
+3. Enable the Gmail API
+4. Go to "Credentials" → "Create Credentials" → "OAuth 2.0 Client IDs"
+5. Set application type to "Web application"
+6. Add authorized redirect URIs:
+   - `http://localhost:3000/auth/callback` (for development)
+   - `https://yourdomain.com/auth/callback` (for production)
+7. Copy the Client ID and Client Secret
+
+### 4. Configure Environment Variables
+
+Copy the example environment file and fill in your Google OAuth credentials:
+
+```bash
+cp .env.local.example .env.local
+```
+
+Edit `.env.local`:
+```env
+GOOGLE_CLIENT_ID=your_google_client_id_here
+GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+GOOGLE_REDIRECT_URI=http://localhost:3000/auth/callback
+
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id_here
+NEXT_PUBLIC_GOOGLE_REDIRECT_URI=http://localhost:3000/auth/callback
+```
+
+### 5. Run the Development Server
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Usage
 
-### 1. Connect Gmail Account
-- Click the "Connect Gmail" button in the sidebar
-- Authorize MailMate to access your Gmail account
-- You'll be redirected back to the application
+### Connecting Gmail Accounts
 
-### 2. View Emails
-- Your inbox emails will be displayed automatically
-- Click on any email to view its full content
-- Use the search bar to find specific emails
+1. Click "Connect Gmail Account" on the welcome screen
+2. Sign in with your Google account
+3. Grant necessary permissions for Gmail access
+4. Your account will be connected and emails will start syncing
 
-### 3. Use AI Features
-- **In Email View**: Click on any AI action button (Summarize, Categorize, etc.)
-- **In AI Tools View**: Use the tool cards to process multiple emails
-- **Generate Replies**: Use the "Generate Reply" feature to create contextual responses
+### Managing Multiple Accounts
 
-### 4. Search Emails
-- Use the search bar in the header to search across all emails
-- Search results are displayed in a dedicated view
+- Use the account switcher in the left rail to switch between accounts
+- Each account maintains its own email state and categories
+- Add more accounts using the "+" button in the account switcher
 
-## API Endpoints
+### Email Categories
 
-### Authentication
-- `GET /api/auth/gmail` - Get Gmail authentication URL
-- `GET /api/auth/gmail/callback` - Handle OAuth callback
+The app automatically categorizes emails into:
+- **Priority**: Important emails requiring immediate attention
+- **Active**: Current conversations and active threads
+- **Internal**: Company/internal communications
+- **Partners**: Partner and vendor communications
+- **News**: Newsletters and updates
 
-### Email Operations
-- `GET /api/emails` - Get inbox emails
-- `GET /api/emails/:id` - Get specific email details
-- `GET /api/emails/search` - Search emails
-- `POST /api/emails/:id/reply` - Send reply to email
+### Keyboard Shortcuts
 
-### AI Processing
-- `POST /api/emails/:id/process` - Process email with AI
+- `P` - Promote email
+- `S` - Snooze email
+- `#` - Mark as spam
+- `↑/↓` - Navigate messages
+- `Enter` - Open message
+- `⌘K` - Open shortcuts panel
 
 ## Project Structure
 
 ```
-MailMate/
-├── server.js                 # Main Express server
-├── services/
-│   ├── gmailService.js      # Gmail API integration
-│   └── chatgptService.js    # ChatGPT API integration
-├── public/
-│   ├── index.html           # Main HTML file
-│   ├── styles.css           # CSS styles
-│   └── app.js              # Frontend JavaScript
-├── data/                    # Token storage (created automatically)
-├── package.json
-└── README.md
+mailmate/
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   │   └── auth/          # Authentication endpoints
+│   ├── auth/              # OAuth callback pages
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Main app page
+├── components/             # Reusable components
+├── services/               # Business logic services
+│   ├── authService.ts     # Google OAuth handling
+│   └── gmailService.ts    # Gmail API integration
+├── store/                  # State management
+│   └── emailStore.ts      # Zustand store
+├── types/                  # TypeScript type definitions
+│   └── email.ts           # Email-related types
+├── .env.local.example     # Environment variables template
+├── next.config.js         # Next.js configuration
+├── package.json           # Dependencies and scripts
+├── tailwind.config.js     # Tailwind CSS configuration
+└── tsconfig.json          # TypeScript configuration
 ```
 
-## Development
+## API Endpoints
 
-### Running in Development Mode
-```bash
-npm run dev
-```
-
-### Building for Production
-```bash
-npm run build
-```
-
-### Available Scripts
-- `npm start` - Start the production server
-- `npm run dev` - Start development server with nodemon
-- `npm run build` - Build frontend assets
-- `npm run dev:build` - Build frontend assets in development mode with watch
-
-## Security Features
-
-- **Helmet.js**: Security headers
-- **CORS**: Cross-origin resource sharing configuration
-- **Rate Limiting**: API rate limiting to prevent abuse
-- **OAuth2**: Secure Gmail authentication
-- **Environment Variables**: Secure API key management
-
-## Troubleshooting
-
-### Common Issues
-
-1. **"Failed to connect to Gmail"**
-   - Check your Gmail API credentials in `.env`
-   - Ensure Gmail API is enabled in Google Cloud Console
-   - Verify redirect URI matches your configuration
-
-2. **"Failed to process email with AI"**
-   - Check your ChatGPT API key in `.env`
-   - Ensure you have sufficient OpenAI API credits
-   - Verify the email content is not empty
-
-3. **"Token expired"**
-   - Re-authenticate with Gmail by clicking "Connect Gmail"
-   - Check if your OAuth2 credentials are still valid
-
-### Debug Mode
-Enable debug logging by setting:
-```env
-NODE_ENV=development
-DEBUG=mailmate:*
-```
+- `POST /api/auth/google/callback` - Exchange OAuth code for tokens
+- `POST /api/auth/refresh` - Refresh expired access tokens
 
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Support
 
-For support and questions:
-- Create an issue in the repository
-- Check the troubleshooting section above
-- Review the Google Cloud Console and OpenAI documentation
+If you encounter any issues or have questions:
+
+1. Check the [Issues](https://github.com/yourusername/mailmate/issues) page
+2. Create a new issue with detailed information
+3. Include your environment details and error messages
 
 ## Roadmap
 
-- [ ] Email threading support
-- [ ] Advanced email filtering
-- [ ] Bulk email processing
-- [ ] Email templates
-- [ ] Calendar integration
-- [ ] Multi-account support
-- [ ] Email analytics dashboard
-- [ ] Custom AI prompts
-- [ ] Email scheduling
-- [ ] Advanced search filters 
+- [ ] Email composition with rich text editor
+- [ ] Attachment handling and file uploads
+- [ ] Email templates and signatures
+- [ ] Advanced filtering and rules
+- [ ] Email analytics and insights
+- [ ] Mobile app (React Native)
+- [ ] Desktop app (Electron)
+- [ ] Team collaboration features
+- [ ] Integration with other email providers
+
+## Acknowledgments
+
+- [Gmail API](https://developers.google.com/gmail/api) for email integration
+- [Next.js](https://nextjs.org/) for the amazing React framework
+- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
+- [Zustand](https://github.com/pmndrs/zustand) for state management
+- [Lucide](https://lucide.dev/) for beautiful icons
+
